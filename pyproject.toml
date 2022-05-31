@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "fast-ai-course"
+version = "0.1.0"
+description = ""
+authors = ["Gavin Noronha <gavinln@hotmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+torch = "^1.11.0"
+fastai = "^2.6.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+ipython = "^8.4.0"
+jupyterlab = "^3.4.2"
+jupyter-console = "^6.4.3"
+black = "^22.3.0"
+flake8 = "^4.0.1"
+seaborn = "^0.11.2"
+python-lsp-server = "^1.4.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 79
+skip-string-normalization = true
