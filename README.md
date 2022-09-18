@@ -55,7 +55,7 @@ pipx install poetry
 pipx list
 ```
 
-6. Clone the fast-ai project
+6. Clone the `fast-ai` project
 
 ```
 git clone https://github.com/gavinln/fast-ai-course
@@ -67,7 +67,7 @@ git clone https://github.com/gavinln/fast-ai-course
 cd fast-ai-course
 ```
 
-8. Clone the fast-ai course
+8. Clone the `fast-ai` course
 
 ```
 git clone https://github.com/fastai/fastbook
@@ -85,9 +85,11 @@ poetry install
 make jupyter
 ```
 
-11. Other
+11. Access jupyter at http://127.0.0.1:8888/
 
-#### Install software
+### Install software manually
+
+Not needed if software installed using poetry
 
 1. Install pytorch
 
@@ -101,8 +103,13 @@ pip3 install torch torchvision torchaudio --extra-index-url https://download.pyt
 ```
 pip install fastai
 ```
-```
 
-#### Lesson 1 - Your first models
+## Lessons
 
+After installing all the software you can run the notebooks in the fastai course
+
+### Lesson 1 - Your first models
+
+* Universal approximation theorem - neural networks
+* Update weights using Stochastic Gradient Descent - SGD
 
