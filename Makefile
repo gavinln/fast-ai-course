@@ -8,5 +8,3 @@ help:  ## help for this Makefile
 .PHONY: jupyter-lab
 jupyter:  ## start jupyter lab
 	poetry run jupyter lab --ip=127.0.0.1 --no-browser --notebook-dir=fastbook
-
-

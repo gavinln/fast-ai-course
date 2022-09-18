@@ -112,4 +112,18 @@ After installing all the software you can run the notebooks in the fastai course
 
 * Universal approximation theorem - neural networks
 * Update weights using Stochastic Gradient Descent - SGD
+* loss is typically used to optimize SGD
+* metric is typically defined for human consumption
 
+#### Transfer learning
+
+Using a pretrained model for a task different to what it was originally trained for
+
+#### Fine-tuning
+
+1. Use one epoch to fit just those parts of the model necessary to get the new
+   random head to work correctly with your dataset.
+
+2. Use the number of epochs requested when calling the method to fit the entire
+   model, updating the weights of the later layers (especially the head) faster
+   than the earlier layers.

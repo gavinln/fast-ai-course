@@ -9,6 +9,7 @@ python = "^3.8"
 torch = "^1.11.0"
 fastai = "^2.6.3"
 fastbook = "^0.0.26"
+voila = "^0.3.6"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"
