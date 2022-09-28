@@ -130,3 +130,4 @@ dmypy.json
 
 # ignore the fast-ai course
 fastbook/
+do_not_checkin/
