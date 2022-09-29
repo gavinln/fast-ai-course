@@ -102,6 +102,18 @@ pip3 install torch torchvision torchaudio --extra-index-url https://download.pyt
 pip install fastai
 ```
 
+## VSCode setup with Python extension
+
+Use the following entries in `settings.json`
+
+```
+{
+    "python.defaultInterpreterPath": "/home/gavin/.cache/pypoetry/virtualenvs/fast-ai-course-DsjtVAmj-py3.8/bin/python",
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": ["-l79"]
+}
+```
+
 ## Lessons - course 2020
 
 After installing all the software you can run the notebooks in the fastai course
@@ -212,12 +224,43 @@ data = DataBlock(
 Bagging models are less likely to overfit as they average predictions over
 trees.
 
+Bagging process
+
+1. Randomly choose a subset of the rows of data
+2. Train a model using this subset
+3. Save the model and return to 1 training more models
+4. Use all models to predict and take the average of the predictions
+
+##### Out-of-bag error
+
+As each round of the bagging process uses a random subset of rows for training,
+the remaining rows can be used for validation and the prediction error on these
+rows is called the out-of-bag (OOB) error. This reduces the need for a separate
+validation set.
+
+##### Feature importance calculation
+
+The feature importance algorithm loops through each tree, and then recursively
+explores each branch. At each branch, it looks to see what feature was used for
+that split, and how much the model improves as a result of that split. The
+improvement (weighted by the number of rows in that group) is added to the
+importance score for that feature. This is summed across all branches of all
+trees, and finally the scores are normalized such that they add to 1
+
+##### Finding out-of-domain data
+
+Out-of-domain data is data which is in the validation set but not in the training set. A model cannot provide good predictions on data different than what it has seen in the past (in the training set).
+
+To find out-of-domain data use a random forest model to predict a target that
+is `is_valid` which is 0 for training data and 1 for validation data. If there are features that can predict the `is_valid` well, it is likely that those features may have values that are not in both the training and validation set.
+
 #### Gradient boosting
 
 1. Train a small model on your dataset
 2. Calculate predictions
 3. Subtract predictions from the targets - called residuals
-4. Go to step one predicting residuals
+4. Go to step one but instead of target predict residuals
+5. Continue until you reach some stopping criterion, such as maximum number of trees
 
 Predictions are made up from the sum of all trees. Boosting models are more
 likely to overfit.
@@ -247,3 +290,32 @@ exist in the data set.
 
 1. High cardinality categorical features
 2. Features which can be better interpreted by a neural network such as plain text
+
+##### Create a decision tree
+
+1. Loop through each feature in the data set
+2. For each feature loop through each value
+3. Split data into two groups based on each value
+4. Find the average value of target for each group
+5. Compute how close each groups actual value compares to target
+6. Pick the split point that gives the best split
+7. Treat each of the two groups as separate data sets
+8. Recursively continue process until a stopping criterion is reached. For example, stop splitting a group if it has only 20 items in it.
+
+##### Processing dates with decision trees
+
+A feature such as `saleDate` is converted into the following
+
+* saleYear
+* saleMonth
+* saleWeek
+* saleDay
+* saleDayofweek
+* saleDayofyear
+* `saleIs_month_end`
+* `saleIs_month_start`
+* `saleIs_quarter_end`
+* `saleIs_quarter_start`
+* `saleIs_year_end`
+* `saleIs_year_start`
+* saleElapsed
